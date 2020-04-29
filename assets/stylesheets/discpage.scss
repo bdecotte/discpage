@@ -455,12 +455,14 @@ html.dpg.dpg-topic.dpg-discuss .fancy-title > .dpg-title-prefix {
   color: #222;
   /* Need to take care of text color on yellow background */
 }
+// 6px is a minimum to cover the text highlight
 .dpg-balloon-text.dpg-highlighted img {
-  outline: 4px solid yellow;
+  outline: 6px solid yellow;
 }
 // Required, because of margin collapsing on ".lightbox-wrapper img"
+// 6px is a minimum to cover the text highlight
 .dpg-balloon-text.dpg-highlighted a.lightbox {
-  outline: 4px solid yellow;
+  outline: 6px solid yellow;
 }
 
 .dpg-subsec.dpg-highlighted:after {
