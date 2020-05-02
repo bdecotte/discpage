@@ -132,8 +132,21 @@ When **logged-in as admin**, you can perform the following actions:
   page (you can also turn DiscPage off from the hamburger menu, then edit the
   topic as you would do normally).
 
-- To **style static pages**, use the `html.dpg-page-content` class. To style an
-  individual page, use the `html[data-dpg-page-id]` data attribute.
+- To **style static pages**, use the `.dpg-page-content` class. To style an
+  individual page, use the `html[data-dpg-page-id]` data attribute. For example,
+  go to `Settings > Customize > Light Theme > Edit CSS/HTML` and enter the 
+  following in the `Common > CSS` section:
+  ```css
+  /* This will turn text to red in all static pages */
+  .dpg-page-content {
+    color: red;
+  }
+
+  /* This will turn text to yellow in static page 13 */
+  html[data-dpg-page-id="13"] .dpg-page-content {
+    color: yellow;
+  }
+  ```
 
 - To **customize a static page**, use the `dpg_displaypage` DOM custom event on 
   the `<html>` tag. For example, you can add this code to a theme component's 
