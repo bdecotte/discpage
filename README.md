@@ -28,7 +28,7 @@ Follow
 [those directions](https://meta.discourse.org/t/install-plugins-in-discourse/19157)
 using `https://github.com/sylque/discpage.git` as the repository URL.
 
-## Setup
+## Basic Setup
 
 ### 1. Create a category for static pages
 
@@ -44,18 +44,6 @@ Set the category parameters as follow:
   - add line `admins can… Create / Reply / See`
   - add line `everyone can… See`
 
-You might also want to
-[unpin and hide](https://meta.discourse.org/t/how-can-i-remove-about-pages-for-categories/45725)
- ("Make Unlisted" in Discourse terms) the "about" topic of the newly created 
- category.
-
-If you don't want static page topics to appear in `/latest`, use the
-[Suppress-Categories-From-Latest](https://github.com/discoursehosting/discourse-suppress-category-from-latest)
-plugin.
-
-If you don't want static page topics to appear in digest emails, use the 
-`digest suppress categories` native Discourse setting.
-
 ### 2. Set those Discourse settings
 
 In the Discourse Admin panel, open the Settings page and set:
@@ -69,7 +57,27 @@ unchecked before you checked it as part of the above setup), set:
 
 - `discpage hide tags` &rightarrow; checked
 
-You can also use those optional settings:
+## Advanced Setup
+
+### Category for static pages
+
+Technically speaking, you can change the category Security parameters to allow 
+more than only admins to create static pages. However, notice that only 
+admins will then be allowed to add balloons (see below).
+
+If you don't want static page topics to appear in `/latest`, use the
+[Suppress-Categories-From-Latest](https://github.com/discoursehosting/discourse-suppress-category-from-latest)
+plugin.
+
+If you don't want static page topics to appear in digest emails, use the 
+`digest suppress categories` Discourse setting.
+
+If you want to delete the "about" topic of the category ("Make Unlisted" in 
+Discourse terms), see [here](https://meta.discourse.org/t/how-can-i-remove-about-pages-for-categories/45725).
+
+### Additional Discourse settings
+
+Optional settings:
 
 - `discpage balloon category`
 
@@ -101,7 +109,7 @@ You can also use those optional settings:
   This will hide the "suggested topics" that are displayed at the bottom of
   topics created through DiscPage balloons.
 
-## Manual
+## Using DiscPage
 
 ### My hamburger menu has turned red, what should I do?
 
