@@ -1,10 +1,6 @@
 # DiscPage
 
-A Discourse plugin to create static pages and insert discussion balloons in the
-text.
-
-DiscPage is a simplified version of [Docuss](https://github.com/sylque/docuss),
-a more comprehensive solution.
+A Discourse plugin to create static pages and insert discussion balloons in the text.
 
 To discuss this plugin, see the [post on Meta](https://meta.discourse.org/t/discpage-a-plugin-to-create-static-pages-and-insert-discussion-balloons-in-the-text/136841).
 
