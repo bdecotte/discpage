@@ -417,6 +417,13 @@ html.dpg.dpg-topic.dpg-discuss .fancy-title > .dpg-title-prefix {
   font-size: 80%;
 }
 
+html.dpg.dpg-topic .gap {
+  // Instead of: "width: calc( 45px + 690px + 2 * 11px)", otherwise it's too 
+  // large
+  width: 100%;
+}
+
+
 /*******************************************************************************
 	Balloons
 *******************************************************************************/
