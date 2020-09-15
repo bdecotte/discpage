@@ -12,10 +12,13 @@ Full website: https://www.castafiore.org
 
 ## Screenshots
 
+A static page:
 ![Static Page](screenshot1.png)
 
+A static page with a balloon's right panel showing a topic list:
 ![Static page with topic list](screenshot2.png)
 
+A static page with a balloon's right panel showing a discussion:
 ![Static page with discussion](screenshot3.png)
 
 ## Installation
@@ -53,13 +56,101 @@ unchecked before you checked it as part of the above setup), set:
 
 - `discpage hide tags` &rightarrow; checked
 
+### 3. My hamburger menu has turned red, what should I do?
+
+![Hamburger Menu](screenshot4.png)
+
+A red hamburger menu means that **DiscPage is disabled**. This occurs:
+1. when an error has prevented DiscPage from starting (in that case, check the
+  debug console for a DiscPage-related error), and
+2. when you manually turn DiscPage off (see below).
+
+## Creating and managing static pages
+
+When **logged-in as admin**, you can perform the following actions:
+
+- To **create a static page**, add the static page category to a topic: the
+  initial post of the topic will be turned into a static page.
+
+- To **edit a static page**, click the "pencil" button at the top right of the
+  static page (you can also turn DiscPage off from the hamburger menu, then edit
+  the topic as you would do normally).
+
+- To **style static pages**, use the `.dpg-page-content` class. To style an
+  individual page, use the `html[data-dpg-page-id]` data attribute. For example,
+  go to `Settings > Customize > Light Theme > Edit CSS/HTML` and enter the 
+  following in the `Common > CSS` section:
+  ```css
+  /* This will turn text to red in all static pages */
+  .dpg-page-content {
+    color: red;
+  }
+
+  /* This will turn text to yellow in static page 13 */
+  html[data-dpg-page-id="13"] .dpg-page-content {
+    color: yellow;
+  }
+  ```
+
+- To **add JavaScript to a static page**, use the `dpg_displaypage` DOM custom event
+  on the `<html>` tag. For example, you can add this code to a theme component's 
+  `</head>` section:
+
+  ```
+  <script>
+    document.documentElement.addEventListener('dpg_displaypage', e => {
+      const pageData = e.detail 
+      if (pageData.pageId === 19) {
+        $(pageData.node).find('.cooked').append('
+          <p>This paragraph has been dynamically added!</p>'
+        )
+      }
+    }, false);
+  </script>  
+  ```
+
+## Adding discussion balloons to a static page
+
+To add a balloon, add `[dpgb id=myBalloonId][/dpgb]` to your topic text. For
+example:
+
+```
+## Introduction [dpgb id=intro][/dpgb]
+```
+
+The balloon id must contain only [a-zA-z_]. Unless you know what you're doing, 
+it should be **unique to the page**.
+
+When adding a balloon **to a heading**, selecting the balloon will highlight
+both the heading and the following subsection.
+
+To append a balloon to the page title, add `{dpg-title-balloon}`
+anywhere in the page. The balloon id will be `title`.
+
+## Other features
+
+### Turn DiscPage off temporarily
+
+At any time, if you need to see your website _without_ DiscPage, use the
+`DiscPage On/Off` item in the hamburger menu. This comes handy when 
+troubleshooting issues with tags or categories. When turning DiscPage off, 
+the hamburger menu turns red (see above).
+
+Keyboard shortcut: alt+a
+
+### Home Page
+
+To set a static page as the Discourse home page, use the
+[discourse-home-page](https://github.com/sylque/discourse-home-page) plugin.
+
+### Revisions
+
+To add a button allowing users to navigate through page revisions, add
+`{dpg-show-rev-button}` anywhere in the page.
+
 ## Advanced Setup
 
-### Category for static pages
-
-Technically speaking, you can change the category Security parameters to allow 
-more than only admins to create static pages. However, notice that only 
-admins will then be allowed to add balloons (see below).
+### Tuning the static page category
 
 If you don't want static page topics to appear in `/latest`, use the
 [Suppress-Categories-From-Latest](https://github.com/discoursehosting/discourse-suppress-category-from-latest)
@@ -71,9 +162,7 @@ If you don't want static page topics to appear in digest emails, use the
 If you want to delete the "about" topic of the category ("Make Unlisted" in 
 Discourse terms), see [here](https://meta.discourse.org/t/how-can-i-remove-about-pages-for-categories/45725).
 
-### Additional Discourse settings
-
-Optional settings:
+### Optional Discourse settings
 
 - `discpage balloon category`
 
@@ -104,98 +193,6 @@ Optional settings:
 
   This will hide the "suggested topics" that are displayed at the bottom of
   topics created through DiscPage balloons.
-
-## Using DiscPage
-
-### My hamburger menu has turned red, what should I do?
-
-![Hamburger Menu](screenshot4.png)
-
-A red hamburger menu means that **DiscPage is off**. This occurs:
-1. when an error has prevented DiscPage from starting (in that case, check the
-  debug console for a DiscPage-related error), and
-2. when you manually turn DiscPage off (see below).
-
-### Turn DiscPage off temporarily
-
-At any time, if you need to see your website _without_ DiscPage, use the
-`DiscPage On/Off` item in the hamburger menu. This comes handy when 
-troubleshooting issues with tags or categories. When turning DiscPage off, 
-the hamburger menu turns red (see above).
-
-Keyboard shortcut: alt+a
-
-### Static Pages
-
-When **logged-in as admin**, you can perform the following actions:
-
-- To **create a static page**, add the static page category to a topic: the
-  initial post of the topic will be turned into a static page.
-
-- To **edit a static page**, click the "pencil" button at the top right of the
-  page (you can also turn DiscPage off from the hamburger menu, then edit the
-  topic as you would do normally).
-
-- To **style static pages**, use the `.dpg-page-content` class. To style an
-  individual page, use the `html[data-dpg-page-id]` data attribute. For example,
-  go to `Settings > Customize > Light Theme > Edit CSS/HTML` and enter the 
-  following in the `Common > CSS` section:
-  ```css
-  /* This will turn text to red in all static pages */
-  .dpg-page-content {
-    color: red;
-  }
-
-  /* This will turn text to yellow in static page 13 */
-  html[data-dpg-page-id="13"] .dpg-page-content {
-    color: yellow;
-  }
-  ```
-
-- To **customize a static page**, use the `dpg_displaypage` DOM custom event on 
-  the `<html>` tag. For example, you can add this code to a theme component's 
-  `</head>` section:
-
-  ```
-  <script>
-    document.documentElement.addEventListener('dpg_displaypage', e => {
-      const pageData = e.detail 
-      if (pageData.pageId === 19) {
-        $(pageData.node).find('.cooked').append('
-          <p>This paragraph has been dynamically added!</p>'
-        )
-      }
-    }, false);
-  </script>  
-  ```
-
-### Home Page
-
-To set a static page as the Discourse home page, use the
-[discourse-home-page](https://github.com/sylque/discourse-home-page) plugin.
-
-### Balloons
-
-To add a balloon, add `[dpgb id=myBalloonId][/dpgb]` to your topic text. For
-example:
-
-```
-## Introduction [dpgb id=intro][/dpgb]
-```
-
-The balloon id must contain only [a-zA-z_]. Unless you know what you're doing, 
-it should be **unique to the page**.
-
-When adding a balloon **to a heading**, selecting the balloon will highlight
-both the heading and the following subsection.
-
-To append a balloon to the page title, add `{dpg-title-balloon}`
-anywhere in the page. The balloon id will be `title`.
-
-### Revisions
-
-To add a button allowing users to navigate through page revisions, add
-`{dpg-show-rev-button}` anywhere in the page.
 
 ## License
 
