@@ -167,18 +167,17 @@ Discourse terms), see [here](https://meta.discourse.org/t/how-can-i-remove-about
 - `discpage balloon category`
 
   This will set the specified category (for example: _Orange Balloon_) to all
-  topics created through DiscPage balloons. The category must have the
-  `Create/Reply/See` permission set to `everyone` (this is the Discourse
-  default). The category will be hidden by DiscPage, so that users don't use it
-  outside of static pages.
+  topics created through DiscPage balloons. The category will be hidden by DiscPage,
+  so that users don't use it outside of static pages.
 
   In fact, you can set multiple categories in here. Let's call PageCat the
-  category of the static page the balloon belongs to. When choosing the balloon 
-  category to use, DiscPage will take the first category in the list which is 
-  either a sibling of PageCat (same immediate parent), or the immediate parent 
+  category of the static page the balloon belongs to. If  there are more than 
+  one balloon category in this field, DiscPage will take the first one which is 
+  either a sibling of PageCat (same immediate parent) or the immediate parent 
   of PageCat. If no such category is found, DiscPage will take the first 
   category of the list. This feature allows to pair [static page category, 
-  balloon category], which is useful, for example, for multilingual forums.
+  balloon category], which is useful, for example, for multilingual forums or
+  to set up static pages with different group permissions.
 
 - `discpage never bump pages`
 
