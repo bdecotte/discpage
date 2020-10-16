@@ -65,7 +65,9 @@ A red hamburger menu means that **DiscPage is disabled**. This occurs:
   debug console for a DiscPage-related error), and
 2. when you manually turn DiscPage off (see below).
 
-## Creating and managing static pages
+## Basic Features
+
+### Creating and managing static pages
 
 When **logged-in as admin**, you can perform the following actions:
 
@@ -92,7 +94,7 @@ When **logged-in as admin**, you can perform the following actions:
   }
   ```
   
-## Adding discussion balloons to a static page
+### Adding discussion balloons to a static page
 
 To add a balloon, add `[dpgb id=myBalloonId][/dpgb]` to your topic text. For
 example:
@@ -133,17 +135,6 @@ If you don't want static page topics to appear in digest emails, use the
 If you want to delete the "about" topic of the category ("Make Unlisted" in 
 Discourse terms), see [here](https://meta.discourse.org/t/how-can-i-remove-about-pages-for-categories/45725).
 
-### Setting up a home page
-
-To set a static page as the Discourse home page, use the
-[discourse-home-page](https://github.com/sylque/discourse-home-page) plugin.
-
-### Adding page navigation
-
-You can customize your Discourse header with links pointing on static pages. To learn more about it, see
-[Best way to customize the header](https://meta.discourse.org/t/best-way-to-customize-the-header/13368) and
-[discourse-custom-header-links2](https://github.com/sylque/discourse-custom-header-links2).
-
 ### Enabling revisions
 
 To add a button allowing users to navigate through page revisions, add
@@ -167,7 +158,18 @@ you can add this code to a theme component's `</head>` section:
   </script>  
   ```
 
-### Advanced settings
+### Setting up a home page
+
+To set a static page as the Discourse home page, use the
+[discourse-home-page](https://github.com/sylque/discourse-home-page) plugin.
+
+### Adding page navigation
+
+You can customize your Discourse header with links pointing on static pages. To learn more about it, see
+[Best way to customize the header](https://meta.discourse.org/t/best-way-to-customize-the-header/13368) and
+[discourse-custom-header-links2](https://github.com/sylque/discourse-custom-header-links2).
+
+### More settings
 
 - `discpage balloon category`
 
