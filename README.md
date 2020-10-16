@@ -91,24 +91,7 @@ When **logged-in as admin**, you can perform the following actions:
     color: yellow;
   }
   ```
-
-- To **add JavaScript to a static page**, use the `dpg_displaypage` DOM custom event
-  on the `<html>` tag. For example, you can add this code to a theme component's 
-  `</head>` section:
-
-  ```
-  <script>
-    document.documentElement.addEventListener('dpg_displaypage', e => {
-      const pageData = e.detail 
-      if (pageData.pageId === 19) {
-        $(pageData.node).find('.cooked').append('
-          <p>This paragraph has been dynamically added!</p>'
-        )
-      }
-    }, false);
-  </script>  
-  ```
-
+  
 ## Adding discussion balloons to a static page
 
 To add a balloon, add `[dpgb id=myBalloonId][/dpgb]` to your topic text. For
@@ -127,9 +110,7 @@ both the heading and the following subsection.
 To append a balloon to the page title, add `{dpg-title-balloon}`
 anywhere in the page. The balloon id will be `title`.
 
-## Other features
-
-### Turn DiscPage off temporarily
+### Turning DiscPage off temporarily
 
 At any time, if you need to see your website _without_ DiscPage, use the
 `DiscPage On/Off` item in the hamburger menu. This comes handy when 
@@ -138,17 +119,7 @@ the hamburger menu turns red (see above).
 
 Keyboard shortcut: alt+a
 
-### Home Page
-
-To set a static page as the Discourse home page, use the
-[discourse-home-page](https://github.com/sylque/discourse-home-page) plugin.
-
-### Revisions
-
-To add a button allowing users to navigate through page revisions, add
-`{dpg-show-rev-button}` anywhere in the page.
-
-## Advanced Setup
+## Advanced Usage
 
 ### Tuning the static page category
 
@@ -162,7 +133,41 @@ If you don't want static page topics to appear in digest emails, use the
 If you want to delete the "about" topic of the category ("Make Unlisted" in 
 Discourse terms), see [here](https://meta.discourse.org/t/how-can-i-remove-about-pages-for-categories/45725).
 
-### Optional Discourse settings
+### Setting up a home page
+
+To set a static page as the Discourse home page, use the
+[discourse-home-page](https://github.com/sylque/discourse-home-page) plugin.
+
+### Adding page navigation
+
+You can customize your Discourse header with links pointing on static pages. To learn more about it, see
+[Best way to customize the header](https://meta.discourse.org/t/best-way-to-customize-the-header/13368) and
+[discourse-custom-header-links2](https://github.com/sylque/discourse-custom-header-links2).
+
+### Enabling revisions
+
+To add a button allowing users to navigate through page revisions, add
+`{dpg-show-rev-button}` anywhere in the page.
+
+### Adding JavaScript to a static page
+
+Use the `dpg_displaypage` DOM custom event on the `<html>` tag. For example, 
+you can add this code to a theme component's `</head>` section:
+
+  ```
+  <script>
+    document.documentElement.addEventListener('dpg_displaypage', e => {
+      const pageData = e.detail 
+      if (pageData.pageId === 19) {
+        $(pageData.node).find('.cooked').append('
+          <p>This paragraph has been dynamically added!</p>'
+        )
+      }
+    }, false);
+  </script>  
+  ```
+
+### Advanced settings
 
 - `discpage balloon category`
 
@@ -191,7 +196,7 @@ Discourse terms), see [here](https://meta.discourse.org/t/how-can-i-remove-about
 - `discpage hide sugg topics`
 
   This will hide the "suggested topics" that are displayed at the bottom of
-  topics created through DiscPage balloons.
+  topics created through DiscPage balloons. 
 
 ## License
 
