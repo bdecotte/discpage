@@ -3,14 +3,14 @@
 *******************************************************************************/
 
 /* Disable centered header */
-html.dpg header.d-header .wrap {
+/*html.dpg header.d-header .wrap {
   margin: unset;
   max-width: none;
   /* With max-width:none, the hamburger menu is now sticked to the right side 
   of the window. Unfortunately, when opened, the hamburger menu goes outside of 
   the right side of the window. So we need to increase x-padding from 8px to 10px */
-  padding: 0px 10px;
-}
+/*  padding: 0px 10px;
+}*/
 
 html.dpg[data-dpg-layout='0'],
 html.dpg[data-dpg-layout='2'] {
