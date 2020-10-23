@@ -87,7 +87,7 @@ function K(a) {
 function L({
     method: a,
     path: b,
-    H: e
+    I: e
 }) {
     return new Promise((f, d) => {
         $.ajax({
@@ -117,7 +117,7 @@ function ca({
     L({
         method: "POST",
         path: "/tag_groups",
-        H: {
+        I: {
             name: a,
             tag_names: b,
             one_per_topic: e,
@@ -135,7 +135,7 @@ function da({
     L({
         method: "PUT",
         path: `/tag_groups/${a}.json`,
-        H: {
+        I: {
             tag_names: b
         }
     })
@@ -184,7 +184,7 @@ function N(a, {
       </div>
     `);
     var g = a.c.includes("{dpg-title-balloon}") ? '<span class="dpg-balloon-text" data-dpg-id="title"></span>' : "";
-    g = a.K.cooked(`<h1>${p+g}</h1>\n` + h).init();
+    g = a.G.cooked(`<h1>${p+g}</h1>\n` + h).init();
     k.find(".dpg-body .topic-body").append(g);
     let u = a.j.siteSettings.force_lowercase_tags,
         t = a.j.siteSettings.max_tag_length;
@@ -239,7 +239,7 @@ function N(a, {
         let q = `dpg-${b}`;
         m = m.find(n => n.name === q);
         y.sort();
-        m ? ea(m.I, y) || da({
+        m ? ea(m.J, y) || da({
             id: m.id,
             D: y
         }) : ca({
@@ -251,14 +251,14 @@ function N(a, {
         m = m.reduce((q, n) => {
             if (n.count && n.parsed.a === b) {
                 const r = k.find(`.dpg-balloon-text[data-dpg-id="${n.parsed.s}"]`);
-                r.length ? (n.J = r.next().find(".dpg-badge"), q.push(n)) : A(`In page "${b}": missing balloon for tag "${n.id}"`)
+                r.length ? (n.K = r.next().find(".dpg-badge"), q.push(n)) : A(`In page "${b}": missing balloon for tag "${n.id}"`)
             }
             return q
         }, []);
         E(m, q => ba({
             tag: q.id
         }).then(n => {
-            (n = n.filter(r => r.visible).length) && q.J.text(n).show()
+            (n = n.filter(r => r.visible).length) && q.K.text(n).show()
         }).then(() => F(250)))
     });
     g = k.find(".dpg-buttons-right");
@@ -439,7 +439,7 @@ function S(a, {
 }
 
 function T(a, b, e, f) {
-    a.G.animate ? (a = a.G.animate([{
+    a.H.animate ? (a = a.H.animate([{
         left: b
     }, {
         left: e
@@ -481,7 +481,7 @@ class ha {
         this.L = b;
         this.C = a.site.mobileView;
         this.left = document.getElementById("dpg-left");
-        this.G = document.getElementById("dpg-ghost");
+        this.H = document.getElementById("dpg-ghost");
         this.c = this.a = this.l = null;
         this.F = (a = User.current()) && a.admin;
         this.N = L({
@@ -498,10 +498,10 @@ class ha {
             d = {
                 id: d.id,
                 name: d.name,
-                I: d.tag_names
+                J: d.tag_names
             };
             if (d.name && d.name.startsWith("dpg-")) {
-                if (J.test(d.name.substring(4))) return d.I.sort(), [...f, d];
+                if (J.test(d.name.substring(4))) return d.J.sort(), [...f, d];
                 A(`Invalid discpage tag group "${d.name}"`)
             }
             return f
@@ -734,7 +734,7 @@ function Z(a, b) {
 export function init(a, b) {
     let e = User.current(),
         f = e && e.admin;
-    if (b.SiteSettings.discpage_enabled && "/login" !== window.location.pathname)
+    if (b.SiteSettings.discpage_enabled && (!b.SiteSettings.login_required || e))
         if (b.SiteSettings.tagging_enabled)
             if (b.SiteSettings.discpage_page_categories) {
                 var d = b.SiteSettings.discpage_page_categories.split("|").map(g => parseInt(g)),
@@ -774,7 +774,10 @@ export function init(a, b) {
                                 }));
                             g.decorateWidget("header:before", u => {
                                 Y().then(() => {
-                                    a.b.K = u
+                                    a.b.G = u;
+                                    a.b.G.widget.model = {
+                                        can_edit: !1
+                                    }
                                 })
                             });
                             g.decorateWidget("post:after", u => {
@@ -793,22 +796,23 @@ export function init(a, b) {
                                     })
                                 }
                             });
-                            g.onAppEvent("page:changed", ({
-                                ["currentRouteName"]: u,
-                                ["url"]: t
-                            }) => {
-                                if (t !== k) {
-                                    var w = t.split("?")[0] === k.split("?")[0];
-                                    k = t;
-                                    ja({
-                                        u: a,
-                                        A: u,
-                                        w,
-                                        v: d,
-                                        B: c
-                                    })
-                                }
-                            })
+                            g.onAppEvent("page:changed",
+                                ({
+                                    ["currentRouteName"]: u,
+                                    ["url"]: t
+                                }) => {
+                                    if (t !== k) {
+                                        var w = t.split("?")[0] === k.split("?")[0];
+                                        k = t;
+                                        ja({
+                                            u: a,
+                                            A: u,
+                                            w,
+                                            v: d,
+                                            B: c
+                                        })
+                                    }
+                                })
                         });
                         TopicNavigationComponent.reopen({
                             _performCheckSize() {
