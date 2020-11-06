@@ -305,9 +305,11 @@ html.dpg.dpg-tag section.navigation-container > .tag-show-heading {
 /* Hide the category selection field in the composer when a "Balloon Category" 
 has been set in the settings. Also hide the category selection field when 
 editing a topic. This prevents the user from changing the category 
-when creating/editing a topic. */
+when creating/editing a topic. ALso hide the category in the Discourse header 
+(when scrolling down a long balloon topic)*/
 html.dpg.dpg-tag.dpg-hide-balloon-cat .composer-fields .category-input,
-html.dpg.dpg-topic.dpg-hide-balloon-cat .edit-topic-title .category-chooser {
+html.dpg.dpg-topic.dpg-hide-balloon-cat .edit-topic-title .category-chooser,
+html.dpg.dpg-topic.dpg-hide-balloon-cat .d-header .categories-wrapper {
   display: none !important;
 }
 
